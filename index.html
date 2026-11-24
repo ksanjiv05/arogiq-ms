@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f6e56">
+  <title>Sheet Forms</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="progress" class="progress" hidden></div>
+
+  <!-- Loading, setup-needed and error messages -->
+  <section id="screenMsg" class="setup">
+    <h1 id="msgTitle">Sheet Forms</h1>
+    <div id="msgBody"><p class="muted">Loading…</p></div>
+  </section>
+
+  <!-- Access key -->
+  <section id="screenKey" class="setup" hidden>
+    <h1>Sheet Forms</h1>
+    <p id="keyMsg" class="muted">Enter the access key you were given.</p>
+    <form id="keyForm">
+      <div class="field">
+        <label class="field-label" for="keyInput">Access key</label>
+        <input id="keyInput" type="password" required autocomplete="current-password"
+               autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <button class="btn primary block" type="submit">Continue</button>
+    </form>
+  </section>
+
+  <!-- Main screen -->
+  <div id="main" hidden>
+    <header class="appbar">
+      <div class="appbar-row">
+        <h1 id="docTitle">Sheet Forms</h1>
+        <button class="btn small" id="refreshBtn" type="button">Refresh</button>
+      </div>
+      <div class="appbar-row" id="pickers">
+        <select id="tabSelect" aria-label="Sheet tab"></select>
+        <select id="viewSelect" aria-label="Column view"></select>
+      </div>
+      <div class="appbar-row">
+        <input type="search" id="search" placeholder="Search rows" aria-label="Search rows">
+        <button class="btn small" id="layoutBtn" type="button">Table</button>
+        <button class="btn small primary" id="columnsBtn" type="button">Columns</button>
+      </div>
+    </header>
+
+    <main id="list"></main>
+    <footer id="foot" class="foot"></footer>
+
+    <button id="addBtn" class="fab" type="button">+ Add row</button>
+  </div>
+
+  <!-- Column chooser -->
+  <dialog id="columnsDlg" class="sheet">
+    <div class="dlg">
+      <header class="dlg-head">
+        <h2 tabindex="-1" autofocus>Columns</h2>
+      </header>
+      <div class="dlg-body">
+        <div class="field" id="viewNameField">
+          <label class="field-label" for="viewName">View name</label>
+          <input id="viewName" maxlength="60" autocomplete="off">
+        </div>
+        <p class="muted small" id="columnsNote"></p>
+        <p class="muted small">Show = visible in the list. Edit = appears in the form when you tap a row.</p>
+        <div class="col-bulk">
+          <span>Show</span>
+          <button type="button" class="btn small" data-bulk="view-all">All</button>
+          <button type="button" class="btn small" data-bulk="view-none">None</button>
+          <span>Edit</span>
+          <button type="button" class="btn small" data-bulk="edit-all">All</button>
+          <button type="button" class="btn small" data-bulk="edit-none">None</button>
+        </div>
+        <div id="columnsList"></div>
+        <div id="viewAdmin" class="stack">
+          <button type="button" class="btn block" id="saveAsNew">Save as new view</button>
+          <button type="button" class="btn block danger" id="deleteView">Delete this view</button>
+        </div>
+      </div>
+      <footer class="dlg-foot">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="button" class="btn primary" id="columnsApply">Save</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Edit row / add row -->
+  <dialog id="rowDlg" class="sheet">
+    <form id="rowForm" class="dlg" novalidate>
+      <header class="dlg-head">
+        <h2 id="rowTitle" tabindex="-1" autofocus>Row</h2>
+      </header>
+      <div class="dlg-body" id="rowBody"></div>
+      <footer class="dlg-foot">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="submit" class="btn primary" id="rowSave">Save</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

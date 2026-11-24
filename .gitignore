@@ -1,0 +1,5 @@
+# Local test harnesses and scratch files (not part of the app)
+.tmp/
+.DS_Store
+.env
+.env.*
